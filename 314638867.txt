@@ -1,0 +1,37 @@
+בנאי ריק במונום
+0 אמור להיות מבוטל
+this מיותר ברוב המקומות
+אין פולינום מעתיק
+tostring לא ברור מה הולך שם
+Polynom p7 = new Polynom("1.0X^3 + 7.0X + 6.0");
+		System.out.println(p7);
+6.07.0X1.0X^3
+מפה והלאה שיננו את הtoString שיהיה עם רווח שיהיה קל לדבג
+equals לא קולט 0
+Polynom p7 = new Polynom("1.0X^3 + 7.0X");
+		Polynom p8 = new Polynom("1.0X^3 + 7.0X");
+		p8.add(new Monom());
+		System.out.println(p7.equals(p8));
+		System.out.println(p8);
+
+ 7.0X 1.0X^3
+false
+ 0.0 7.0X 1.0X^3
+isZero
+		Polynom p8 = new Polynom();
+		p8.add(new Monom());
+		System.out.println(p8.isZero());
+false
+
+area 
+חישוב שטח לא נכון
+יוצא שטח ענק
+		Polynom p7 = new Polynom("8.0X");
+System.out.println(p7.area(0, 2, 0.1));
+608000.0
+javadoc מילוי חלקי
+אין RETURN 
+ואין הסבר על פרמטרים
+לא רשום מחבר עדכני
+לא היה MAIN היה טסטים במקום אבל היה 
+הטסטים נראים בסדר 
