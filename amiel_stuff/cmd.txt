@@ -8,9 +8,9 @@ check updates
 git status
 
 מאשר את העלאה
-git add
+git add .
 
 העלאת קובץ
-git commit --massage "**file name**"
+git commit -m "**file name**"
 
 
