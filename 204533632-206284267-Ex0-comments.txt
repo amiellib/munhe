@@ -1,0 +1,19 @@
+monom:
+* @author Boaz
+no need "this" in most cases
+
+polynom:
+* @author Boaz
+no need "this" in most cases
+copy constructor should use copy function
+area: should be exception not return 0
+      and was asked to ignore the area under line of x=0
+      Polynom p2 = new Polynom("x");
+      System.out.println(p2.area(-2, 2, 0.01));
+      should bring in 2 but we get 4.
+
+good project over all
+
+
+javadocs:
+polynom : some params and returns are missing explaination
