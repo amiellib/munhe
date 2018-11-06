@@ -1,0 +1,36 @@
+monom:
+*@auther Boaz
+*toString needs adjustment example:
+		Polynom p7 = new Polynom("1.0X^3 + 7.0X + 6.0");
+		System.out.println(p7);
+	 
+	6.07.0X1.0X^3
+from here we adjusted the printing with " ".
+*monom 0.0 causes many problems for example:
+	isZero
+		Polynom p8 = new Polynom();
+		p8.add(new Monom());
+		System.out.println(p8.isZero());
+	false
+
+	equals
+	        Polynom p7 = new Polynom("1.0X^3 + 7.0X");
+		Polynom p8 = new Polynom("1.0X^3 + 7.0X");
+		p8.add(new Monom());
+		System.out.println(p7.equals(p8));
+		System.out.println(p8);
+
+	7.0X 1.0X^3
+	false
+	0.0 7.0X 1.0X^3
+*no need "this" in most cases
+
+Polynom
+*no copy constructor
+*area calculation is wrong for example: 
+		Polynom p7 = new Polynom("8.0X");
+		System.out.println(p7.area(0, 2, 0.1));
+
+	608000.0
+javadoc:
+many parms and returns dont have explanation
