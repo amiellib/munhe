@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 
-class JunitTest {
+class JunitTest {	
 	@org.junit.jupiter.api.Test
 	void testPolynom() {
 		try {
@@ -246,8 +246,8 @@ class JunitTest {
 	@org.junit.jupiter.api.Test
 		void testDraw() {
 			try {
-				Polynom poly = new Polynom("0.2x^4-1.5x^3+3x^2-x-5");
-				poly.draw(-2, 6, 0.01);
+				Main main = new Main();
+				main.draw("0.2x^4-1.5x^3+3x^2-x-5",-2, 6, 0.01);
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				fail("bad input");
@@ -261,13 +261,12 @@ class JunitTest {
 		@org.junit.jupiter.api.Test
 		void testExtremum() {
 			try {
-				Polynom poly = new Polynom("0.2x^4-1.5x^3+3x^2-x-5");	
+				Main main = new Main();
+				ArrayList<Double> this_array = main.extremum(-2,6, "0.2x^4-1.5x^3+3x^2-x-5", 0.01);
 				ArrayList<Double> result_array = new ArrayList<Double>();
 				result_array.add(0.2);
 				result_array.add(1.76);
-				result_array.add(3.685);
-				ArrayList<Double> this_array = poly.extremum(-2, 6, 0.01);
-				
+				result_array.add(3.685);				
 				for (int i=0; i<this_array.size();i++)
 				{
 					assertTrue(result_array.get(i) - 0.1<= this_array.get(i) &&  result_array.get(i) + 0.1 >= this_array.get(i));
@@ -282,5 +281,20 @@ class JunitTest {
 				e.printStackTrace();
 			}
 	}
-
+		@org.junit.jupiter.api.Test
+		void testAreaUnderLine() {
+			try {
+				Main main = new Main();
+				double areaUnderTheLine = main.areaUnder("0.2x^4-1.5x^3+3x^2-x-5",-2, 6, 0.01);
+				assertTrue(25.17 <= areaUnderTheLine && 25.19 >= areaUnderTheLine);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				fail("bad input");
+				e.printStackTrace();
+			} catch (wrongDataException e) {
+				// TODO Auto-generated catch block
+				fail("bad input");
+				e.printStackTrace();
+			}
+	}
 }
