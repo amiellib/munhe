@@ -31,11 +31,16 @@ public class MyCoords implements coords_converter
 
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
-
 		double[] my_azimuth_elevation_dist= new  double[3];
-		my_azimuth_elevation_dist[0] = gps1.north_angle(gps0);
-		my_azimuth_elevation_dist[1] = gps1.up_angle(gps0);		
+		double  dx = gps0.x()- gps1.x();
+		double dy = gps0.y() - gps1.y();
+		double result = (dx > 0) ? ((Math.PI*0.5) - Math.atan(dy/dx)) :  (dx < 0) ? ((Math.PI*1.5) - Math.atan(dy/dx)) :
+			(dy < 0) ? Math.PI : 0;
+		my_azimuth_elevation_dist[0] = Math.toDegrees(result);
+
+		//		my_azimuth_elevation_dist[0] = gps1.north_angle(gps0);
 		my_azimuth_elevation_dist[2] = distance3d(gps1,gps0);
+		my_azimuth_elevation_dist[1] = Math.toDegrees(Math.asin((gps1.z()-gps0.z())/my_azimuth_elevation_dist[2]));
 		return my_azimuth_elevation_dist;
 	}
 
