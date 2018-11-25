@@ -13,15 +13,27 @@ import java.util.ArrayList;
 
 public class Csv2kml {
 
-	public String kmlElement( String SSID, String MAC,String AuthMode,/* String Frequency, String Timestamp ,*/String Date, Point3D point)
+	public String kmlElement(String MAC, String SSID, String AuthMode, String FirstSeen , String Channel ,String RSSI,String AccuracyMeters, String Type, Point3D point)
 	{
 		return "\t<Placemark>\n" +
 				"\t<name><![CDATA[" + SSID + "]]></name>\n" +
-				"\t<description><![CDATA[BSSID: <b>"+MAC+"</b>" +
-				"<br/>Capabilities: <b>"+AuthMode+"</b>"+ 
-				//                 "<br/>Frequency: <b>" + Frequency + "</b>" +
-				//                 "<br/>Timestamp: <b>" + Timestamp + "</b>" +
-				"<br/>Date: <b>" + Date + "</b>]]></description><styleUrl>#red</styleUrl>\n"+
+				"<ExtendedData>\n 	     <Data name=\"MAC\">"
+				+ "  <value>" + MAC + "</value>"
+				+ "    </Data>      <Data name=\"AuthMode\">	  "
+				+ "  <value>" + AuthMode + "</value>"
+				+ "    </Data>      <Data name=\"FirstSeen\">	  "
+				+ "  <value>" + FirstSeen + "</value>"
+				+ "    </Data>      <Data name=\"Channel\">	  "
+				+ "  <value>" + Channel + "</value>"
+				+ "    </Data>      <Data name=\"RSSI\">	  "
+				+ "  <value>" + RSSI + "</value>"
+				+ "    </Data>      <Data name=\"AccuracyMeters\">	  "
+				+ "  <value>" + AccuracyMeters + "</value>"
+				+ "    </Data>      <Data name=\"Type\">	  "
+				+ "  <value>" + Type + "</value>"
+				+ "  </Data>	   "
+				+ " </ExtendedData>"
+				+"<styleUrl>#red</styleUrl>\n"+
 				"\t<Point>\n" +
 				"\t\t<coordinates>"+point.x()+","+point.y()+","+point.z()+ "</coordinates>\n" +
 				"\t</Point>\n" +
@@ -51,10 +63,11 @@ public class Csv2kml {
 			if((line.replaceAll(",","")).replaceAll(" ","").isEmpty())
 				break;
 			String[] row = line.split(",");
-			kmlmiddle = kmlmiddle + kmlElement(row[0], row[1], row[2], row[3], new Point3D(Double.parseDouble(row[6]),Double.parseDouble(row[7]),Double.parseDouble(row[8])));
+			kmlmiddle = kmlmiddle + kmlElement(row[0], row[1], row[2], row[3] , row [4] , row[5], row[9] , row[10], new Point3D(Double.parseDouble(row[7]),Double.parseDouble(row[6]),Double.parseDouble(row[8])));
 			line = br.readLine();
 		}
-		String kmlend = "</kml>";
+		String kmlend = "    </Folder>\n" + 
+				"  </Document> \n </kml>";
 
 		return kmlstart + kmlmiddle + kmlend;
 	}
