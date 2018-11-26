@@ -10,11 +10,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 
-/**
- * 
- * @author Shilo Gilor and Amiel Liberman
- *
- */
+
 public class Csv2kml {
 
 	public String kmlElement(String MAC, String SSID, String AuthMode, String FirstSeen , String Channel ,String RSSI,String AccuracyMeters, String Type, Point3D point)
