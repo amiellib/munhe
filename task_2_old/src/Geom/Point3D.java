@@ -3,6 +3,7 @@ package Geom;
 import java.io.Serializable;
 public class Point3D implements Geom_element, Serializable 
 {
+	static public int  EARTH_RADIUS = 6371000;
 
 	/**
 	 * This class represents a 3D point in space.
@@ -237,5 +238,20 @@ public final static int DOWN = 6, UP = 7;
 	/** transform from radians to angles */
 	public static double d2r(double a) { return Math.toRadians(a);}
 	////////////////////////////////////////////////////////////////////////////////
-
+	public Point3D convert_radians_to_cartesian(Point3D p)
+	{	
+		double x = (EARTH_RADIUS+p._z) * Math.cos(p._x/180*Math.PI) * Math.cos(p._y/180*Math.PI);
+		double y = (EARTH_RADIUS+p._z) * Math.cos(p._x/180*Math.PI) * Math.sin(p._y/180*Math.PI);
+		double z = (EARTH_RADIUS+p._z) * Math.sin(p._x/180*Math.PI) - EARTH_RADIUS;
+		return new Point3D(x,y,z);
+	}
+	public Point3D convert_cartesian_to_radians(Point3D p)
+	{
+		double x = Math.asin(p._z/EARTH_RADIUS)*180/Math.PI;
+		x = (x>180) ? x-360 : x; 
+		double y = Math.atan2(p._y, p._x)*180/Math.PI;
+		y = (y>90) ? y-180 : y;
+		double z = Math.sqrt(Math.pow(p._x, 2) + Math.pow(p._y, 2) + Math.pow(p._z, 2))-EARTH_RADIUS  ;
+		return new Point3D(x,y,z);
+	}
 }
